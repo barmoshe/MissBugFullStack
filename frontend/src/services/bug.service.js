@@ -36,21 +36,7 @@ async function getById(bugId) {
 }
 
 async function save(bug) {
-  if (bug._id) {
-    try {
-      const res = await axios.put(`${BASE_URL}/${bug._id}`, bug);
-      return res.data;
-    } catch (err) {
-      console.log("Error in bugService.save", err);
-    }
-  } else {
-    try {
-      const res = await axios.post(`${BASE_URL}/save`, bug);
-      return res.data;
-    } catch (err) {
-      console.log("Error in bugService.save", err);
-    }
-  }
+
 }
 
 async function remove(bugId) {
