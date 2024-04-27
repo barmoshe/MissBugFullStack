@@ -1,7 +1,14 @@
+import Axios from "axios";
 import { storageService } from "./async-storage.service.js";
 
-const STORAGE_KEY = "bugDB";
+var axios = Axios.create({
+  withCredentials: true,
+});
 
+const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "/api/bug"
+    : "http://localhost:3030/api/bug";
 export const bugService = {
   query,
   getById,
@@ -10,19 +17,47 @@ export const bugService = {
 };
 
 async function query() {
-  return await storageService.query(STORAGE_KEY);
+  try {
+    const res = await axios.get(BASE_URL);
+    return res.data;
+  } catch (err) {
+    console.log("Error in bugService.query", err);
+  }
 }
 
 async function getById(bugId) {
-  return await storageService.get(STORAGE_KEY, bugId);
+  try {
+    const res = await axios.get(`${BASE_URL}/${bugId}`);
+    if (res.data) return res.data;
+    else throw new Error(`Error getting bug id ${bugId}`);
+  } catch (err) {
+    console.log("Error in bugService.getById", err);
+  }
 }
 
 async function save(bug) {
-  return bug._id
-    ? storageService.put(STORAGE_KEY, bug)
-    : storageService.post(STORAGE_KEY, bug);
+  if (bug._id) {
+    try {
+      const res = await axios.put(`${BASE_URL}/${bug._id}`, bug);
+      return res.data;
+    } catch (err) {
+      console.log("Error in bugService.save", err);
+    }
+  } else {
+    try {
+      const res = await axios.post(`${BASE_URL}/save`, bug);
+      return res.data;
+    } catch (err) {
+      console.log("Error in bugService.save", err);
+    }
+  }
 }
 
 async function remove(bugId) {
-  return await storageService.remove(STORAGE_KEY, bugId);
+  try {
+    const res = await axios.delete(`${BASE_URL}/${bugId}`);
+    return { bugId };
+  } catch (err) {
+    console.log("Error in bugService.remove", err);
+  }
 }
