@@ -1,5 +1,4 @@
 import Axios from "axios";
-import { storageService } from "./async-storage.service.js";
 
 var axios = Axios.create({
   withCredentials: true,
