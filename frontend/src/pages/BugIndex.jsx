@@ -1,18 +1,24 @@
 import { bugService } from "../services/bug.service.js";
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
 import { BugList } from "../cmps/BugList.jsx";
+import { BugFilterBar } from "../cmps/BugFilterBar.jsx";
 import { useState } from "react";
 import { useEffect } from "react";
 
 export function BugIndex() {
   const [bugs, setBugs] = useState([]);
+  const [filterBy, setFilterBy] = useState({
+    title: "",
+    severity: 0,
+    description: "",
+  });
 
   useEffect(() => {
     loadBugs();
-  }, []);
+  }, [filterBy]);
 
   async function loadBugs() {
-    const bugs = await bugService.query();
+    const bugs = await bugService.query(filterBy);
     if (!bugs) {
       console.log("Cannot load bugs");
       return;
@@ -39,6 +45,7 @@ export function BugIndex() {
     const bug = {
       title: prompt("Bug title?"),
       severity: +prompt("Bug severity?"),
+      description: prompt("Bug description?"),
     };
     try {
       const savedBug = await bugService.save(bug);
@@ -80,6 +87,7 @@ export function BugIndex() {
         <button className="add-btn" onClick={onAddBug}>
           Add Bug ⛐
         </button>
+        <BugFilterBar onSetFilter={setFilterBy} filterBy={filterBy} />
         <BugList bugs={bugs} onRemoveBug={onRemoveBug} onEditBug={onEditBug} />
       </main>
     </main>

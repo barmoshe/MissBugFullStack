@@ -15,13 +15,30 @@ export const bugService = {
   remove,
 };
 
-async function query() {
+async function query(filterBy = {}) {
   try {
     const res = await axios.get(BASE_URL);
-    return res.data;
+    const filterdBugs = _filterBugs(res.data, filterBy);
+    return filterdBugs;
   } catch (err) {
     console.log("Error in bugService.query", err);
   }
+}
+function _filterBugs(bugs, filterBy) {
+  const { title, severity, description } = filterBy;
+
+  const filteredBugs = bugs.filter((bug) => {
+    if (title && !bug.title.toLowerCase().includes(title.toLowerCase()))
+      return false;
+    if (severity && bug.severity !== severity) return false;
+    if (
+      description &&
+      !bug.description.toLowerCase().includes(description.toLowerCase())
+    )
+      return false;
+    return true;
+  });
+  return filteredBugs;
 }
 
 async function getById(bugId) {
