@@ -18,3 +18,92 @@
 27.4.2024, 16:11:55 - INFO - Retrieved bugs successfully | [{"_id":"P68xy2","title":"silverfish ","severity":2,"createdAt":1714058333990},{"_id":"X59s3k","title":"beetle hornet ","severity":1,"createdAt":1714058333991},{"_id":"x55PUj","title":"termite blackwidow ","severity":3,"createdAt":1714058333991},{"_id":"nO2UZJ","title":"gnat crabspider ","severity":2,"createdAt":1714058333991},{"_id":"oy99NH","title":"blackwidow ","severity":3,"createdAt":1714058333991},{"_id":"mDmgJN","title":"orbweaver ","severity":2,"createdAt":1714058333991},{"_id":"9FGXdd","title":"aphid bug ","severity":3,"createdAt":1714058333991},{"_id":"aFTFao","title":"hobo moth ","severity":1,"createdAt":1714058333991},{"_id":"q0RDnw","title":"mantis orbweaver ","severity":1,"createdAt":1714058333991}]
 27.4.2024, 19:45:34 - INFO - Retrieved bugs successfully | [{"_id":"P68xy2","title":"silverfish ","severity":2,"createdAt":1714058333990},{"_id":"X59s3k","title":"beetle hornet ","severity":1,"createdAt":1714058333991},{"_id":"x55PUj","title":"termite blackwidow ","severity":3,"createdAt":1714058333991},{"_id":"nO2UZJ","title":"gnat crabspider ","severity":2,"createdAt":1714058333991},{"_id":"oy99NH","title":"blackwidow ","severity":3,"createdAt":1714058333991},{"_id":"mDmgJN","title":"orbweaver ","severity":2,"createdAt":1714058333991},{"_id":"9FGXdd","title":"aphid bug ","severity":3,"createdAt":1714058333991},{"_id":"aFTFao","title":"hobo moth ","severity":1,"createdAt":1714058333991},{"_id":"q0RDnw","title":"mantis orbweaver ","severity":1,"createdAt":1714058333991}]
 6.5.2024, 13:42:54 - INFO - Server is running on http://localhost:3030
+6.5.2024, 13:48:35 - INFO - Retrieved bugs successfully | [{"_id":"P68xy2","title":"silverfish ","severity":2,"createdAt":1714058333990},{"_id":"X59s3k","title":"beetle hornet ","severity":1,"createdAt":1714058333991},{"_id":"x55PUj","title":"termite blackwidow ","severity":3,"createdAt":1714058333991},{"_id":"nO2UZJ","title":"gnat crabspider ","severity":2,"createdAt":1714058333991},{"_id":"oy99NH","title":"blackwidow ","severity":3,"createdAt":1714058333991},{"_id":"mDmgJN","title":"orbweaver ","severity":2,"createdAt":1714058333991},{"_id":"9FGXdd","title":"aphid bug ","severity":3,"createdAt":1714058333991},{"_id":"aFTFao","title":"hobo moth ","severity":1,"createdAt":1714058333991},{"_id":"q0RDnw","title":"mantis orbweaver ","severity":1,"createdAt":1714058333991}]
+6.5.2024, 13:49:01 - INFO - Bug removed successfully | P68xy2
+6.5.2024, 13:49:07 - WARN - Bug not found | P68xy2
+6.5.2024, 13:49:12 - INFO - Retrieved bugs successfully | [{"_id":"X59s3k","title":"beetle hornet ","severity":1,"createdAt":1714058333991},{"_id":"x55PUj","title":"termite blackwidow ","severity":3,"createdAt":1714058333991},{"_id":"nO2UZJ","title":"gnat crabspider ","severity":2,"createdAt":1714058333991},{"_id":"oy99NH","title":"blackwidow ","severity":3,"createdAt":1714058333991},{"_id":"mDmgJN","title":"orbweaver ","severity":2,"createdAt":1714058333991},{"_id":"9FGXdd","title":"aphid bug ","severity":3,"createdAt":1714058333991},{"_id":"aFTFao","title":"hobo moth ","severity":1,"createdAt":1714058333991},{"_id":"q0RDnw","title":"mantis orbweaver ","severity":1,"createdAt":1714058333991}]
+6.5.2024, 13:49:59 - INFO - Retrieved bugs successfully | [{"_id":"X59s3k","title":"beetle hornet ","severity":1,"createdAt":1714058333991},{"_id":"x55PUj","title":"termite blackwidow ","severity":3,"createdAt":1714058333991},{"_id":"nO2UZJ","title":"gnat crabspider ","severity":2,"createdAt":1714058333991},{"_id":"oy99NH","title":"blackwidow ","severity":3,"createdAt":1714058333991},{"_id":"mDmgJN","title":"orbweaver ","severity":2,"createdAt":1714058333991},{"_id":"9FGXdd","title":"aphid bug ","severity":3,"createdAt":1714058333991},{"_id":"aFTFao","title":"hobo moth ","severity":1,"createdAt":1714058333991},{"_id":"q0RDnw","title":"mantis orbweaver ","severity":1,"createdAt":1714058333991}]
+6.5.2024, 13:50:10 - INFO - Retrieved bugs successfully | [{"_id":"X59s3k","title":"beetle hornet ","severity":1,"createdAt":1714058333991},{"_id":"x55PUj","title":"termite blackwidow ","severity":3,"createdAt":1714058333991},{"_id":"nO2UZJ","title":"gnat crabspider ","severity":2,"createdAt":1714058333991},{"_id":"oy99NH","title":"blackwidow ","severity":3,"createdAt":1714058333991},{"_id":"mDmgJN","title":"orbweaver ","severity":2,"createdAt":1714058333991},{"_id":"9FGXdd","title":"aphid bug ","severity":3,"createdAt":1714058333991},{"_id":"aFTFao","title":"hobo moth ","severity":1,"createdAt":1714058333991},{"_id":"q0RDnw","title":"mantis orbweaver ","severity":1,"createdAt":1714058333991}]
+6.5.2024, 13:51:11 - INFO - Retrieved bugs successfully | [{"_id":"X59s3k","title":"beetle hornet ","severity":1,"createdAt":1714058333991},{"_id":"x55PUj","title":"termite blackwidow ","severity":3,"createdAt":1714058333991},{"_id":"nO2UZJ","title":"gnat crabspider ","severity":2,"createdAt":1714058333991},{"_id":"oy99NH","title":"blackwidow ","severity":3,"createdAt":1714058333991},{"_id":"mDmgJN","title":"orbweaver ","severity":2,"createdAt":1714058333991},{"_id":"9FGXdd","title":"aphid bug ","severity":3,"createdAt":1714058333991},{"_id":"aFTFao","title":"hobo moth ","severity":1,"createdAt":1714058333991},{"_id":"q0RDnw","title":"mantis orbweaver ","severity":1,"createdAt":1714058333991}]
+6.5.2024, 13:51:17 - INFO - Retrieved bugs successfully | [{"_id":"X59s3k","title":"beetle hornet ","severity":1,"createdAt":1714058333991},{"_id":"x55PUj","title":"termite blackwidow ","severity":3,"createdAt":1714058333991},{"_id":"nO2UZJ","title":"gnat crabspider ","severity":2,"createdAt":1714058333991},{"_id":"oy99NH","title":"blackwidow ","severity":3,"createdAt":1714058333991},{"_id":"mDmgJN","title":"orbweaver ","severity":2,"createdAt":1714058333991},{"_id":"9FGXdd","title":"aphid bug ","severity":3,"createdAt":1714058333991},{"_id":"aFTFao","title":"hobo moth ","severity":1,"createdAt":1714058333991},{"_id":"q0RDnw","title":"mantis orbweaver ","severity":1,"createdAt":1714058333991}]
+6.5.2024, 13:51:41 - INFO - Retrieved bugs successfully | [{"_id":"X59s3k","title":"beetle hornet ","severity":1,"createdAt":1714058333991},{"_id":"x55PUj","title":"termite blackwidow ","severity":3,"createdAt":1714058333991},{"_id":"nO2UZJ","title":"gnat crabspider ","severity":2,"createdAt":1714058333991},{"_id":"oy99NH","title":"blackwidow ","severity":3,"createdAt":1714058333991},{"_id":"mDmgJN","title":"orbweaver ","severity":2,"createdAt":1714058333991},{"_id":"9FGXdd","title":"aphid bug ","severity":3,"createdAt":1714058333991},{"_id":"aFTFao","title":"hobo moth ","severity":1,"createdAt":1714058333991},{"_id":"q0RDnw","title":"mantis orbweaver ","severity":1,"createdAt":1714058333991}]
+6.5.2024, 14:07:23 - INFO - Server is running on http://localhost:3030
+6.5.2024, 14:07:32 - INFO - Retrieved bugs successfully , number of bugs: | 8
+6.5.2024, 14:07:48 - INFO - Retrieved bug successfully | {"_id":"X59s3k","title":"beetle hornet ","severity":1,"createdAt":1714058333991}
+6.5.2024, 14:08:20 - INFO - Retrieved bug successfully | {"_id":"X59s3k","title":"beetle hornet ","severity":1,"createdAt":1714058333991}
+6.5.2024, 14:08:31 - INFO - Retrieved bug successfully | {"_id":"X59s3k","title":"beetle hornet ","severity":1,"createdAt":1714058333991}
+6.5.2024, 14:08:36 - INFO - Server is running on http://localhost:3030
+6.5.2024, 14:08:49 - INFO - Server is running on http://localhost:3030
+6.5.2024, 14:09:08 - INFO - Retrieved bug successfully | X59s3k
+6.5.2024, 14:10:18 - INFO - Bug removed successfully | X59s3k
+6.5.2024, 14:12:09 - INFO - Retrieved bugs successfully , number of bugs: | 7
+6.5.2024, 14:12:23 - INFO - Retrieved bugs successfully , number of bugs: | 7
+6.5.2024, 14:12:31 - INFO - Retrieved bugs successfully , number of bugs: | 7
+6.5.2024, 14:12:58 - INFO - Retrieved bugs successfully , number of bugs: | 7
+6.5.2024, 14:13:29 - INFO - Retrieved bugs successfully , number of bugs: | 7
+6.5.2024, 14:13:49 - INFO - Retrieved bugs successfully , number of bugs: | 7
+6.5.2024, 14:13:59 - INFO - Retrieved bugs successfully , number of bugs: | 7
+6.5.2024, 14:13:59 - INFO - Retrieved bugs successfully , number of bugs: | 7
+6.5.2024, 14:14:18 - INFO - Retrieved bugs successfully , number of bugs: | 7
+6.5.2024, 14:14:53 - INFO - Retrieved bugs successfully , number of bugs: | 7
+6.5.2024, 14:15:14 - INFO - Retrieved bugs successfully , number of bugs: | 7
+6.5.2024, 14:15:26 - INFO - Retrieved bugs successfully , number of bugs: | 7
+6.5.2024, 14:15:39 - INFO - Retrieved bugs successfully , number of bugs: | 7
+6.5.2024, 14:16:27 - INFO - Retrieved bugs successfully , number of bugs: | 7
+6.5.2024, 14:16:33 - INFO - Retrieved bugs successfully , number of bugs: | 7
+6.5.2024, 14:16:57 - INFO - Retrieved bugs successfully , number of bugs: | 7
+6.5.2024, 14:16:59 - INFO - Bug removed successfully | x55PUj
+6.5.2024, 14:17:02 - INFO - Retrieved bugs successfully , number of bugs: | 6
+6.5.2024, 14:17:07 - INFO - Bug removed successfully | oy99NH
+6.5.2024, 14:17:09 - INFO - Bug removed successfully | mDmgJN
+6.5.2024, 14:17:09 - INFO - Bug removed successfully | 9FGXdd
+6.5.2024, 14:17:10 - INFO - Bug removed successfully | aFTFao
+6.5.2024, 14:17:11 - INFO - Bug removed successfully | nO2UZJ
+6.5.2024, 14:17:12 - INFO - Bug removed successfully | q0RDnw
+6.5.2024, 14:17:14 - INFO - Retrieved bugs successfully , number of bugs: | 0
+6.5.2024, 14:17:28 - INFO - Server is running on http://localhost:3030
+6.5.2024, 14:17:31 - INFO - Retrieved bugs successfully , number of bugs: | 0
+6.5.2024, 14:17:32 - INFO - Retrieved bugs successfully , number of bugs: | 0
+6.5.2024, 14:18:18 - INFO - Retrieved bugs successfully , number of bugs: | 0
+6.5.2024, 14:18:50 - INFO - Server is running on http://localhost:3030
+6.5.2024, 14:18:51 - INFO - Retrieved bugs successfully , number of bugs: | 9
+6.5.2024, 14:18:52 - INFO - Retrieved bugs successfully , number of bugs: | 9
+6.5.2024, 14:18:53 - INFO - Bug removed successfully | P68xy2
+6.5.2024, 14:27:21 - INFO - Retrieved bugs successfully , number of bugs: | 8
+6.5.2024, 14:27:27 - INFO - Retrieved bugs successfully , number of bugs: | 8
+6.5.2024, 14:28:32 - ERROR - Error saving bug: | TypeError: bugService.post is not a function
+6.5.2024, 14:28:51 - ERROR - Error saving bug: | TypeError: bugService.post is not a function
+6.5.2024, 14:28:55 - ERROR - Error saving bug: | TypeError: bugService.post is not a function
+6.5.2024, 14:29:08 - ERROR - Error saving bug: | TypeError: bugService.post is not a function
+6.5.2024, 14:29:10 - ERROR - Error saving bug: | TypeError: bugService.post is not a function
+6.5.2024, 14:33:01 - ERROR - Error saving bug: | TypeError: bugService.post is not a function
+6.5.2024, 14:33:07 - INFO - Server is running on http://localhost:3030
+6.5.2024, 14:33:09 - INFO - Saving bug: | {"_id":"1","title":"bug1","severity":"3"}
+6.5.2024, 14:33:09 - ERROR - Error saving bug: | Cant find bug with _id 1
+6.5.2024, 14:34:17 - INFO - Saving bug: | {"_id":"1D","title":"bug1","severity":"3"}
+6.5.2024, 14:34:17 - ERROR - Error saving bug: | Cant find bug with _id 1D
+6.5.2024, 14:35:08 - INFO - Saving bug: | {"title":"bug1","severity":"3"}
+6.5.2024, 14:35:08 - INFO - Bug saved successfully | soiHMW
+6.5.2024, 14:35:14 - INFO - Retrieved bugs successfully , number of bugs: | 9
+6.5.2024, 14:38:26 - INFO - Retrieved bugs successfully , number of bugs: | 9
+6.5.2024, 14:39:17 - INFO - Saving bug: | {"_id":"X59s3k","title":"bug test ","severity":"69"}
+6.5.2024, 14:39:17 - INFO - Bug saved successfully | X59s3k
+6.5.2024, 14:39:28 - INFO - Retrieved bugs successfully , number of bugs: | 9
+6.5.2024, 14:41:36 - INFO - Saving bug: | {"_id":"X59s3k","title":"beetle hornet ","severity":"0","createdAt":"1714058333991"}
+6.5.2024, 14:41:36 - INFO - Bug saved successfully | X59s3k
+6.5.2024, 14:41:43 - INFO - Retrieved bugs successfully , number of bugs: | 9
+6.5.2024, 14:41:52 - INFO - Saving bug: | {"_id":"X59s3k","title":"beetle hornet ","severity":"77"}
+6.5.2024, 14:41:52 - INFO - Bug saved successfully | X59s3k
+6.5.2024, 14:42:46 - INFO - Retrieved bugs successfully , number of bugs: | 9
+6.5.2024, 14:42:53 - INFO - Saving bug: | {"_id":"X59s3k","title":"beetle hornet ","severity":"0"}
+6.5.2024, 14:42:53 - INFO - Bug saved successfully | X59s3k
+6.5.2024, 14:43:20 - INFO - Retrieved bugs successfully , number of bugs: | 9
+6.5.2024, 14:43:33 - INFO - Saving bug: | {"_id":"X59s3k","title":"beetle hornet ","severity":"3"}
+6.5.2024, 14:43:33 - INFO - Bug saved successfully | X59s3k
+6.5.2024, 14:44:36 - INFO - Saving bug: | {"title":"barrr","severity":"3"}
+6.5.2024, 14:44:36 - INFO - Bug saved successfully | NIhUfj
+6.5.2024, 14:44:42 - INFO - Retrieved bugs successfully , number of bugs: | 10
+6.5.2024, 15:11:06 - INFO - Bug removed successfully | X59s3k
+6.5.2024, 15:11:09 - INFO - Bug removed successfully | soiHMW
+6.5.2024, 15:11:11 - INFO - Retrieved bugs successfully , number of bugs: | 8
+6.5.2024, 15:11:52 - INFO - Retrieved bugs successfully , number of bugs: | 8

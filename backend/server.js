@@ -19,7 +19,10 @@ app.use(express.static("public"));
 app.get("/api/bug", async (req, res) => {
   try {
     const bugs = await bugService.query();
-    loggerService.info("Retrieved bugs successfully", bugs);
+    loggerService.info(
+      "Retrieved bugs successfully , number of bugs:",
+      bugs.length
+    );
     res.send(bugs);
   } catch (error) {
     loggerService.error("Error retrieving bugs:", error);
@@ -30,13 +33,17 @@ app.get("/api/bug", async (req, res) => {
 // Route to save a bug
 app.get("/api/bug/save", async (req, res) => {
   try {
-    const bug = req.query; // Assuming bug data is sent as query parameters
-    const savedBug = await bugService.post(bug);
-    loggerService.info("Bug saved successfully", savedBug);
-    res.send(savedBug);
+    let bugToSave = {
+      _id: req.query._id,
+      title: req.query.title,
+      severity: +req.query.severity,
+    };
+    bugToSave = await bugService.save(bugToSave);
+    loggerService.info("Bug saved successfully", bugToSave._id);
+    res.send(bugToSave);
   } catch (error) {
     loggerService.error("Error saving bug:", error);
-    res.status(500).send("Error saving bug");
+    res.status(400).send("Error saving bug");
   }
 });
 
@@ -49,11 +56,11 @@ app.get("/api/bug/:bugId", async (req, res) => {
       loggerService.warn("Bug not found", bugId);
       return res.status(404).send("Bug not found");
     }
-    loggerService.info("Retrieved bug successfully", bug);
+    loggerService.info("Retrieved bug successfully", bug._id);
     res.send(bug);
   } catch (error) {
     loggerService.error("Error retrieving bug:", error);
-    res.status(500).send("Error retrieving bug");
+    res.status(400).send("Error retrieving bug");
   }
 });
 

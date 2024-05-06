@@ -35,12 +35,19 @@ async function getById(bugId) {
 }
 
 async function save(bug) {
-
+  try {
+    console.log("bug-service-from-frontend Saving Bug:", bug);
+    const res = await axios.get(`${BASE_URL}/save`, { params: bug });
+    return res.data;
+  } catch (err) {
+    console.log("Error in bugService.save", err);
+  }
 }
 
 async function remove(bugId) {
   try {
-    const res = await axios.delete(`${BASE_URL}/${bugId}`);
+    console.log("bug-service-from-frontend Removing Bug:", bugId);
+    const res = await axios.get(`${BASE_URL}/${bugId}/remove`);
     return { bugId };
   } catch (err) {
     console.log("Error in bugService.remove", err);

@@ -1,6 +1,5 @@
-
-import { Link } from 'react-router-dom'
-import { BugPreview } from './BugPreview'
+import { Link } from "react-router-dom";
+import { BugPreview } from "./BugPreview";
 
 export function BugList({ bugs, onRemoveBug, onEditBug }) {
   return (
@@ -11,14 +10,14 @@ export function BugList({ bugs, onRemoveBug, onEditBug }) {
           <div>
             <button
               onClick={() => {
-                onRemoveBug(bug._id)
+                onRemoveBug(bug._id);
               }}
             >
               x
             </button>
             <button
               onClick={() => {
-                onEditBug(bug)
+                onEditBug(bug);
               }}
             >
               Edit
@@ -28,5 +27,5 @@ export function BugList({ bugs, onRemoveBug, onEditBug }) {
         </li>
       ))}
     </ul>
-  )
+  );
 }

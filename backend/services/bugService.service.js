@@ -51,5 +51,11 @@ async function save(bugToSave) {
   }
 }
 function _saveBugsToFile(path = "./data/bug.json") {
-  fs.writeFileSync(path, JSON.stringify(bugs, null, 2));
+  return new Promise((resolve, reject) => {
+    const data = JSON.stringify(bugs, null, 4);
+    fs.writeFile(path, data, (err) => {
+      if (err) return reject(err);
+      resolve();
+    });
+  });
 }
