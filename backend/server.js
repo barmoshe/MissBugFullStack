@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 import { bugService } from "./services/bugService.service.js";
 import { loggerService } from "./services/logger.service.js";
@@ -13,6 +14,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.use(cookieParser());
 app.use(express.static("public"));
 
 // Route to retrieve all bugs
@@ -37,6 +39,7 @@ app.get("/api/bug/save", async (req, res) => {
       _id: req.query._id,
       title: req.query.title,
       severity: +req.query.severity,
+      description: req.query.description,
     };
     bugToSave = await bugService.save(bugToSave);
     loggerService.info("Bug saved successfully", bugToSave._id);
@@ -50,12 +53,29 @@ app.get("/api/bug/save", async (req, res) => {
 // Route to retrieve a bug by its ID
 app.get("/api/bug/:bugId", async (req, res) => {
   try {
+    let visitedBugs = getVisitedBugsFromCookie(req);
+
+    if (visitedBugs.includes(req.params.bugId)) {
+      loggerService.warn("Bug already visited:", req.params.bugId);
+      return res.status(400).send("Bug already visited");
+    }
+
+    if (hasExceededBugLimit(visitedBugs)) {
+      loggerService.warn("User exceeded the limit of 3 visited bugs");
+      return res.status(401).send("User exceeded the limit of 3 visited bugs");
+    }
+
+    visitedBugs.push(req.params.bugId);
+    updateVisitedBugsCookie(res, visitedBugs);
+
     const bugId = req.params.bugId;
     const bug = await bugService.getById(bugId);
     if (!bug) {
       loggerService.warn("Bug not found", bugId);
       return res.status(404).send("Bug not found");
     }
+
+    loggerService.info("Visited bugs:", visitedBugs);
     loggerService.info("Retrieved bug successfully", bug._id);
     res.send(bug);
   } catch (error) {
@@ -80,3 +100,18 @@ app.get("/api/bug/:bugId/remove", async (req, res) => {
 app.listen(port, () => {
   loggerService.info(`Server is running on http://localhost:${port}`);
 });
+
+//Helper function to retrieve visited bugs from the cookie
+function getVisitedBugsFromCookie(req) {
+  return JSON.parse(req.cookies.visitedBugs || "[]");
+}
+
+// Helper function to update visited bugs in the cookie
+function updateVisitedBugsCookie(res, visitedBugs) {
+  res.cookie("visitedBugs", JSON.stringify(visitedBugs), { maxAge: 7 * 1000 });
+}
+
+// Helper function to check if the user has visited more than 3 bugs
+function hasExceededBugLimit(visitedBugs) {
+  return visitedBugs.length >= 3;
+}
