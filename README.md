@@ -2,6 +2,8 @@
 
 This is a simple bug  system implemented in Node.js. It allows users to manage bugs by adding, updating, removing, and viewing bug details.
 
+[link](https://missbugfullstack.onrender.com) to deployed version 
+
 ## Features
 
 - **Get Bugs:** Retrieve a list of bugs with filtering, sorting, and pagination.
