@@ -1,43 +1,53 @@
-import { bugService } from "../services/bug.service.js";
-import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
+import { useState, useEffect } from "react";
 import { BugList } from "../cmps/BugList.jsx";
 import { BugFilterBar } from "../cmps/BugFilterBar.jsx";
-import { useState } from "react";
-import { useEffect } from "react";
+import { bugService } from "../services/bug.service.js";
+import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
 
 export function BugIndex() {
   const [bugs, setBugs] = useState([]);
-  const [filterBy, setFilterBy] = useState({
-    title: "",
-    severity: 0,
-    description: "",
-  });
+  const [filterBy, setFilterBy] = useState({ txt: "", severity: 0 });
+  const [totalPages, setTotalPages] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     loadBugs();
-  }, [filterBy]);
+  }, [filterBy, currentPage]); // Trigger loadBugs on filterBy or currentPage change
 
   async function loadBugs() {
-    const bugs = await bugService.query(filterBy);
-    if (!bugs) {
-      console.log("Cannot load bugs");
-      return;
+    try {
+      const { bugs, totalPages } = await bugService.query({
+        ...filterBy,
+        pageIdx: currentPage,
+      });
+      console.log("Bugs loaded:", bugs);
+      setBugs(bugs);
+      setTotalPages(totalPages);
+    } catch (error) {
+      if (error.response?.status === 400) {
+        if (error.response.data === "Invalid page index") {
+          //change the current page to the last page
+          setCurrentPage(totalPages);
+          return;
+        }
+      }
+      console.error("Error loading bugs:", error);
+      showErrorMsg("Error loading bugs");
     }
-    setBugs(bugs);
+  }
+
+  async function onPageChange(pageIdx) {
+    setCurrentPage(pageIdx);
   }
 
   async function onRemoveBug(bugId) {
-    console.log("Removing Bug:", bugId);
-
     try {
-      const bugRemoved = await bugService.remove(bugId);
-      if (!bugRemoved) throw new Error("Cannot remove bug");
-      console.log("Deleted Succesfully!");
+      await bugService.remove(bugId);
       setBugs((prevBugs) => prevBugs.filter((bug) => bug._id !== bugId));
       showSuccessMsg("Bug removed");
-    } catch (err) {
-      console.log("Error from onRemoveBug ->", err);
-      showErrorMsg("Cannot remove bug");
+    } catch (error) {
+      console.error("Error removing bug:", error);
+      showErrorMsg("Error removing bug");
     }
   }
 
@@ -61,8 +71,8 @@ export function BugIndex() {
 
   async function onEditBug(bug) {
     const severity = +prompt("New severity?");
-    if (isNaN(severity) || severity < 1 || severity > 3)
-      return showErrorMsg("Severity must be a number between 1-3");
+    if (isNaN(severity) || severity < 1)
+      return showErrorMsg("Severity must be a number greater than 0");
     const bugToSave = { ...bug, severity };
     try {
       const savedBug = await bugService.save(bugToSave);
@@ -89,6 +99,21 @@ export function BugIndex() {
         </button>
         <BugFilterBar onSetFilter={setFilterBy} filterBy={filterBy} />
         <BugList bugs={bugs} onRemoveBug={onRemoveBug} onEditBug={onEditBug} />
+        <div className="pagination">
+          <button
+            disabled={currentPage === 1}
+            onClick={() => onPageChange(currentPage - 1)}
+          >
+            Previous
+          </button>
+          <span>Page {currentPage}</span>
+          <button
+            disabled={currentPage === totalPages}
+            onClick={() => onPageChange(currentPage + 1)}
+          >
+            Next
+          </button>
+        </div>
       </main>
     </main>
   );

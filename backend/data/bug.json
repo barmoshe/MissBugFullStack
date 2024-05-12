@@ -1,49 +1,104 @@
 [
     {
         "_id": "x55PUj",
-        "title": "termite blackwidow ",
+        "title": "can't login",
         "severity": 3,
-        "createdAt": 1714058333991
+        "createdAt": 1714058333991,
+        "description": "This bug indicates that users are unable to log in to the system.",
+        "labels": [
+            "critical",
+            "need-CR",
+            "dev-branch"
+        ]
     },
     {
         "_id": "nO2UZJ",
-        "title": "gnat crabspider ",
+        "title": "failed to load",
         "severity": 2,
-        "createdAt": 1714058333991
+        "createdAt": 1714058333991,
+        "description": "This bug suggests that there's an issue with loading certain components or resources within the system.",
+        "labels": [
+            "need-CR",
+            "UI",
+            "backend"
+        ]
     },
     {
         "_id": "oy99NH",
-        "title": "blackwidow ",
+        "title": "server down",
         "severity": 3,
-        "createdAt": 1714058333991
+        "createdAt": 1714058333991,
+        "description": "This bug indicates that the server hosting the application is not functioning properly or is completely offline.",
+        "labels": [
+            "not enough info",
+            "server-side",
+            "urgent"
+        ]
     },
     {
         "_id": "mDmgJN",
-        "title": "orbweaver ",
+        "title": "can't login again",
         "severity": 2,
-        "createdAt": 1714058333991
+        "createdAt": 1714058333991,
+        "description": "Similar to the first bug, this indicates a recurring issue where users cannot log in to the system.",
+        "labels": [
+            "need-CR",
+            "authentication",
+            "frontend"
+        ]
     },
     {
         "_id": "9FGXdd",
-        "title": "aphid bug ",
+        "title": "error 404",
         "severity": 3,
-        "createdAt": 1714058333991
+        "createdAt": 1714058333991,
+        "description": "This bug signifies that a requested resource was not found on the server, typically resulting in a '404 Not Found' error.",
+        "labels": [
+            "HTTP",
+            "server-side",
+            "urgent"
+        ]
     },
     {
         "_id": "aFTFao",
-        "title": "hobo moth ",
+        "title": "input missmatch",
         "severity": 1,
-        "createdAt": 1714058333991
+        "createdAt": 1714058333991,
+        "description": "This bug suggests that there's an inconsistency or discrepancy in the input data provided to the system.",
+        "labels": [
+            "data-validation",
+            "minor",
+            "frontend"
+        ]
     },
     {
         "_id": "q0RDnw",
-        "title": "mantis orbweaver ",
+        "title": "overflown",
         "severity": 1,
-        "createdAt": 1714058333991
+        "createdAt": 1714058333991,
+        "description": "This bug indicates that there's an overflow condition occurring, possibly leading to unexpected behavior or system instability.",
+        "labels": [
+            "performance",
+            "memory",
+            "critical"
+        ]
     },
     {
         "_id": "NIhUfj",
         "title": "barrr",
-        "severity": 3
+        "severity": 3,
+        "description": "This bug lacks a specific title, possibly indicating an incomplete entry or oversight in the bug tracking system.",
+        "labels": [
+            "misc",
+            "missing-title",
+            "backend"
+        ]
+    },
+    {
+        "title": "afda",
+        "severity": 55,
+        "description": "sdff",
+        "_id": "svPU9r",
+        "createdAt": 1715513600230
     }
 ]

@@ -17,15 +17,15 @@ export const bugService = {
 
 async function query(filterBy = {}) {
   try {
-    const res = await axios.get(BASE_URL);
-    const filterdBugs = _filterBugs(res.data, filterBy);
-    return filterdBugs;
+    const res = await axios.get(BASE_URL, { params: { ...filterBy } });
+    console.log("res.data.bugs", res.data.bugs);
+    return res.data;
   } catch (err) {
     console.log("Error in bugService.query", err);
   }
 }
 function _filterBugs(bugs, filterBy) {
-  const { title, severity, description } = filterBy;
+  const { txt, severity } = filterBy;
 
   const filteredBugs = bugs.filter((bug) => {
     if (title && !bug.title.toLowerCase().includes(title.toLowerCase()))
@@ -53,9 +53,15 @@ async function getById(bugId) {
 
 async function save(bug) {
   try {
-    console.log("bug-service-from-frontend Saving Bug:", bug);
-    const res = await axios.get(`${BASE_URL}/save`, { params: bug });
-    return res.data;
+    if (bug._id) {
+      // If bug has an _id, it means it already exists, so update it
+      const res = await axios.put(`${BASE_URL}/${bug._id}`, { bug });
+      return res.data;
+    } else {
+      // If bug doesn't have an _id, it's a new bug, so add it
+      const res = await axios.post(BASE_URL, { bug });
+      return res.data;
+    }
   } catch (err) {
     console.log("Error in bugService.save", err);
   }
@@ -64,7 +70,7 @@ async function save(bug) {
 async function remove(bugId) {
   try {
     console.log("bug-service-from-frontend Removing Bug:", bugId);
-    const res = await axios.get(`${BASE_URL}/${bugId}/remove`);
+    const res = await axios.delete(`${BASE_URL}/${bugId}`);
     return { bugId };
   } catch (err) {
     console.log("Error in bugService.remove", err);
