@@ -18,7 +18,6 @@ export const bugService = {
 async function query(filterBy = {}) {
   try {
     const res = await axios.get(BASE_URL, { params: { ...filterBy } });
-    console.log("res.data.bugs", res.data.bugs);
     return res.data;
   } catch (err) {
     console.log("Error in bugService.query", err);
@@ -69,7 +68,6 @@ async function save(bug) {
 
 async function remove(bugId) {
   try {
-    console.log("bug-service-from-frontend Removing Bug:", bugId);
     const res = await axios.delete(`${BASE_URL}/${bugId}`);
     return { bugId };
   } catch (err) {

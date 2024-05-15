@@ -3,7 +3,6 @@ import { loggerService } from "../../services/logger.service.js";
 
 export async function getUsers(req, res) {
   const { pageIdx, txt, sortBy } = req.query;
-  console.log("users query:", req.query);
   try {
     const users = await userService.query({ txt }, sortBy, +pageIdx);
     res.send(users);
@@ -54,7 +53,6 @@ export async function updateUser(req, res) {
 
 export async function addUser(req, res) {
   const { user } = req.body;
-  console.log("user", user);
   try {
     const newUser = await userService.save(user);
     loggerService.info("User added successfully:", newUser._id);

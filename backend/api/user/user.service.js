@@ -53,7 +53,6 @@ async function getById(userId) {
 }
 
 async function remove(userId) {
-  console.log("userId in remove", userId);
   try {
     const userIdx = users.findIndex((user) => user._id === userId);
     users.splice(userIdx, 1);

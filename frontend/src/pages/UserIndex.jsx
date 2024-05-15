@@ -19,7 +19,6 @@ export function UserIndex() {
         ...filterBy,
         pageIdx: currentPage,
       });
-      console.log("Users loaded:", users);
       setUsers(users);
       setTotalPages(totalPages);
     } catch (error) {

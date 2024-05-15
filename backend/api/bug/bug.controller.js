@@ -3,7 +3,6 @@ import { loggerService } from "../../services/logger.service.js";
 
 export async function getBugs(req, res) {
   const { pageIdx, txt, severity, sortBy } = req.query;
-  console.log("req.query:", req.query);
 
   try {
     const bugs = await bugService.query({ txt, severity }, sortBy, +pageIdx);
