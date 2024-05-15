@@ -6,7 +6,7 @@ var axios = Axios.create({
 
 const BASE_URL =
   process.env.NODE_ENV === "production"
-    ? "/api/bug"
+    ? "/api/user"
     : "http://localhost:3030/api/user";
 
 export const userService = {
@@ -19,7 +19,6 @@ export const userService = {
 async function query(filterBy = {}) {
   try {
     const res = await axios.get(BASE_URL, { params: { ...filterBy } });
-    console.log("res.data", res.data.users);
     return res.data;
   } catch (err) {
     console.log("Error in userService.query", err);
