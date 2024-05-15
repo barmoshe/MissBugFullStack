@@ -20,7 +20,12 @@ async function query(filterBy, sortBy, pageIdx = 1) {
     if (filterBy) {
       filteredBugs = _filterBugs(filterBy, filteredBugs);
     }
-
+    if (!filteredBugs.length) {
+      return {
+        bugs: [],
+        totalPages: 0,
+      };
+    }
     // Sorting
     if (sortBy) {
       filteredBugs = _sortBugs(sortBy, filteredBugs);
@@ -47,7 +52,7 @@ async function query(filterBy, sortBy, pageIdx = 1) {
 
 async function getById(bugId) {
   try {
-    const bug = bugs.find((bug) => bug._id === bugId);
+    const bug = await bugs.find((bug) => bug._id === bugId);
     return bug;
   } catch (error) {
     throw error;
@@ -84,36 +89,46 @@ async function save(bugToSave) {
 
 function _filterBugs(filterBy, bugs) {
   const { txt, severity } = filterBy;
-  return bugs.filter((bug) => {
+
+  const filteredBugs = bugs.filter((bug) => {
     let matchTxt = true;
     let matchSeverity = true;
-    let matchLabels = true;
+
+    // Ensure bug properties are defined and valid
+    const bugTitle = bug.title ? bug.title.toLowerCase() : "";
+    const bugDescription = bug.description ? bug.description.toLowerCase() : "";
+    const bugLabels = Array.isArray(bug.labels) ? bug.labels : [];
+    const bugSeverity = typeof bug.severity === "number" ? bug.severity : -1;
 
     if (txt) {
+      const txtLower = txt.toLowerCase();
       matchTxt =
-        bug.title.toLowerCase().includes(txt.toLowerCase()) ||
-        bug.description.toLowerCase().includes(txt.toLowerCase()) ||
-        bug.labels.some((label) =>
-          label.toLowerCase().includes(txt.toLowerCase())
-        );
+        bugTitle.includes(txtLower) ||
+        bugDescription.includes(txtLower) ||
+        bugLabels.some((label) => label.toLowerCase().includes(txtLower));
     }
 
     if (severity) {
-      matchSeverity = bug.severity >= severity;
+      matchSeverity = bugSeverity >= severity;
     }
 
-    return matchTxt && matchSeverity && matchLabels;
+    return matchTxt && matchSeverity;
   });
+
+  return filteredBugs;
 }
 
 function _sortBugs(sortBy, bugs) {
-  const { sortBy: sortByField, sortDir } = sortBy;
-  return bugs.sort((a, b) => {
-    const sortFactor = sortDir === -1 ? -1 : 1;
-    if (a[sortByField] > b[sortByField]) return sortFactor;
-    if (a[sortByField] < b[sortByField]) return -sortFactor;
-    return 0;
-  });
+  switch (sortBy) {
+    case "title":
+      return bugs.sort((a, b) => a.title.localeCompare(b.title));
+    case "severity":
+      return bugs.sort((a, b) => a.severity - b.severity);
+    case "createdAt":
+      return bugs.sort((a, b) => a.createdAt - b.createdAt);
+    default:
+      return bugs;
+  }
 }
 
 function _saveBugsToFile(path = "./data/bug.json") {

@@ -7,18 +7,20 @@ import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
 export function BugIndex() {
   const [bugs, setBugs] = useState([]);
   const [filterBy, setFilterBy] = useState({ txt: "", severity: 0 });
+  const [sortBy, setSortBy] = useState("title");
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     loadBugs();
-  }, [filterBy, currentPage]); // Trigger loadBugs on filterBy or currentPage change
+  }, [filterBy, sortBy, currentPage]);
 
   async function loadBugs() {
     try {
       const { bugs, totalPages } = await bugService.query({
         ...filterBy,
         pageIdx: currentPage,
+        sortBy,
       });
       console.log("Bugs loaded:", bugs);
       setBugs(bugs);
@@ -97,7 +99,12 @@ export function BugIndex() {
         <button className="add-btn" onClick={onAddBug}>
           Add Bug ⛐
         </button>
-        <BugFilterBar onSetFilter={setFilterBy} filterBy={filterBy} />
+        <BugFilterBar
+          onSetFilter={setFilterBy}
+          filterBy={filterBy}
+          sortBy={sortBy}
+          onSetSort={setSortBy}
+        />
         <BugList bugs={bugs} onRemoveBug={onRemoveBug} onEditBug={onEditBug} />
         <div className="pagination">
           <button

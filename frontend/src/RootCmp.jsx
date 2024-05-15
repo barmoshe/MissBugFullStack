@@ -6,7 +6,7 @@ import { BugDetails } from "./pages/BugDetails.jsx";
 import { UserIndex } from "./pages/UserIndex.jsx";
 import { UserDetails } from "./pages/UserDetails.jsx";
 import { AboutUs } from "./pages/AboutUs.jsx";
-import { Route, HashRouter as Router, Routes } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import { UserMsg } from "./cmps/UserMsg.jsx";
 

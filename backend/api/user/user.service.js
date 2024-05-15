@@ -1,78 +1,115 @@
-import fs from 'fs'
-import { utilService } from '../../services/util.service.js'
-import { loggerService } from '../../services/logger.service.js'
+import fs from "fs";
+import { utilService } from "../../services/util.service.js";
 
-
-const users = utilService.readJsonFile('data/user.json')
+let users = [];
+users = utilService.readJsonFile("data/user.json");
+const PAGE_SIZE = 5;
 
 export const userService = {
-    query,
-    getById,
-    remove,
-    save,
-    getByUsername
-}
+  query,
+  getById,
+  remove,
+  save,
+};
 
+async function query(filterBy, sortBy, pageIdx = 1) {
+  let filteredUsers = [...users];
 
+  try {
+    // Filtering
+    if (filterBy) {
+      filteredUsers = _filterUsers(filterBy, filteredUsers);
+    }
 
-async function query() {
-    return users
+    // Sorting
+    if (sortBy) {
+      filteredUsers = _sortUsers(sortBy, filteredUsers);
+    }
+
+    // Paging
+    const totalPages = Math.ceil(filteredUsers.length / PAGE_SIZE);
+    if (pageIdx > totalPages) {
+      throw new Error("Invalid page index");
+    }
+
+    const startIndex = (pageIdx - 1) * PAGE_SIZE || 0;
+    const endIndex = startIndex + PAGE_SIZE;
+    const pagedUsers = filteredUsers.slice(startIndex, endIndex);
+
+    return {
+      users: pagedUsers,
+      totalPages: totalPages,
+    };
+  } catch (error) {
+    throw error;
+  }
 }
 
 async function getById(userId) {
-    try {
-        const user = users.find(user => user._id === userId)
-        if (!user) throw `User not found by userId : ${userId}`
-        return user
-    } catch (err) {
-        loggerService.error('userService[getById] : ', err)
-        throw err
-    }
-}
-
-async function getByUsername(username) {
-    const user = users.find(user => user.username === username)
-    return user
+  try {
+    const user = users.find((user) => user._id === userId);
+    return user;
+  } catch (error) {
+    throw error;
+  }
 }
 
 async function remove(userId) {
-    try {
-        const idx = users.findIndex(user => user._id === userId)
-        if (idx === -1) throw `Couldn't find user with _id ${causerIdrId}`
-
-        users.splice(idx, 1)
-        await _saveUsersToFile()
-    } catch (err) {
-        loggerService.error('userService[remove] : ', err)
-        throw err
-    }
+  console.log("userId in remove", userId);
+  try {
+    const userIdx = users.findIndex((user) => user._id === userId);
+    users.splice(userIdx, 1);
+    _saveUsersToFile();
+  } catch (error) {
+    throw error;
+  }
 }
 
 async function save(user) {
-    try {
-        // Only handles user ADD for now
-        user._id = utilService.makeId()
-        user.score = 10000
-        user.createdAt = Date.now()
-        if (!user.imgUrl) user.imgUrl = 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
-        users.push(user)
-        await _saveUsersToFile()
-        return user
-    } catch (err) {
-        loggerService.error('userService[save] : ', err)
-        throw err
+  try {
+    if (user._id) {
+      const userIdx = users.findIndex((u) => u._id === user._id);
+      users[userIdx] = user;
+    } else {
+      user._id = utilService.makeId();
+      users.push(user);
     }
+    _saveUsersToFile();
+    return user;
+  } catch (error) {
+    throw error;
+  }
+}
+
+function _filterUsers(filterBy, users) {
+  const { txt, minScore } = filterBy;
+
+  const filteredUsers = users.filter((user) => {
+    if (txt && !user.username.toLowerCase().includes(txt.toLowerCase()))
+      return false;
+    if (minScore && user.score < minScore) return false;
+    return true;
+  });
+  return filteredUsers;
+}
+
+function _sortUsers(sortBy, users) {
+  return users.sort((a, b) => {
+    if (a[sortBy] < b[sortBy]) return -1;
+    if (a[sortBy] > b[sortBy]) return 1;
+    return 0;
+  });
 }
 
 function _saveUsersToFile() {
-    return new Promise((resolve, reject) => {
-
-        const usersStr = JSON.stringify(users, null, 2)
-        fs.writeFile('data/user.json', usersStr, (err) => {
-            if (err) {
-                return console.log(err);
-            }
-            resolve()
-        })
-    })
+  fs.writeFileSync("data/user.json", JSON.stringify(users, null, 2));
 }
+
+//example user :
+//{
+//     "_id": "u101",
+//     "fullname": "Muki Ja",
+//     "username": "muki",
+//     "password": "muki1234",
+//     "score": 100
+// }
