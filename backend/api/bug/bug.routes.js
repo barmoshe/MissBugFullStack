@@ -6,13 +6,15 @@ import {
   removeBug,
   updateBug,
 } from "./bug.controller.js";
+import { trackVisitedBugs } from "../../middleware/visitedBugs.middleware.js";
+import { logRequests } from "../../middleware/logger.middleware.js";
 
 const router = express.Router();
 
-router.get("/", getBugs);
-router.get("/:bugId", getBug);
-router.delete("/:bugId", removeBug);
-router.put("/:bugId", updateBug);
-router.post("/", addBug);
+router.get("/", logRequests, getBugs);
+router.get("/:bugId", logRequests, trackVisitedBugs, getBug);
+router.delete("/:bugId", logRequests, removeBug);
+router.put("/:bugId", logRequests, updateBug);
+router.post("/", logRequests, addBug);
 
 export const bugRoutes = router;

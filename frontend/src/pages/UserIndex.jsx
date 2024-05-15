@@ -76,12 +76,29 @@ export function UserIndex() {
       showErrorMsg("Error updating user");
     }
   }
+  async function onAddUser() {
+    const user = {
+      fullname: prompt("User fullname?"),
+      username: prompt("User username?"),
+      password: prompt("User password?"),
+      score: +prompt("User score?"),
+    };
+    try {
+      await userService.save(user);
+      loadUsers();
+      showSuccessMsg("User added");
+    } catch (error) {
+      console.error("Error adding user:", error);
+      showErrorMsg("Error adding user");
+    }
+  }
   if (!users) {
     console.error("No users");
     return <div>Loading...</div>;
   }
   return (
     <div className="user-index">
+      <button onClick={onAddUser}>Add User</button>
       <UserFilterBar filterBy={filterBy} setFilterBy={setFilterBy} />
       <UserList
         users={users}

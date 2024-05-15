@@ -6,7 +6,6 @@
     "password": "muki1234",
     "score": 100
   },
-
   {
     "_id": "u102",
     "fullname": "Shuki Ja",
@@ -14,7 +13,6 @@
     "password": "shuki1234",
     "score": 75
   },
-
   {
     "_id": "u103",
     "fullname": "Tuki Ja",
@@ -36,7 +34,6 @@
     "password": "ssuki1ssss234",
     "score": 753
   },
-
   {
     "_id": "u153",
     "fullname": "Tueeeei Ja",
@@ -50,5 +47,12 @@
     "username": "tueedfsfseki",
     "password": "tukiee1asdfasdf234",
     "score": 532
+  },
+  {
+    "fullname": " bar",
+    "username": "asdasdasd",
+    "password": "123432443",
+    "score": 55,
+    "_id": "PBOrXo"
   }
 ]
