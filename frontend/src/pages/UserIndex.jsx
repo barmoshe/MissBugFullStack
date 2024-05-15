@@ -77,7 +77,7 @@ export function UserIndex() {
       showErrorMsg("Error updating user");
     }
   }
-
+  if (!users) return <div>Loading...</div>;
   return (
     <div className="user-index">
       <UserFilterBar filterBy={filterBy} setFilterBy={setFilterBy} />
