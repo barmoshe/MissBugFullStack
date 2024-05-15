@@ -418,3 +418,16 @@
 15.5.2024, 13:27:51 - INFO - Server is running on http://localhost:3030
 15.5.2024, 13:27:56 - INFO - Server is running on http://localhost:3030
 15.5.2024, 13:28:50 - INFO - Server is running on http://localhost:3030
+15.5.2024, 13:43:41 - INFO - Server is running on http://localhost:3030
+15.5.2024, 13:44:34 - INFO - Server is running on http://localhost:3030
+15.5.2024, 13:44:54 - INFO - Server is running on http://localhost:3030
+15.5.2024, 13:45:16 - INFO - Server is running on http://localhost:3030
+15.5.2024, 13:45:23 - ERROR - Error retrieving users: | ReferenceError: minScore is not defined
+15.5.2024, 13:45:55 - INFO - Server is running on http://localhost:3030
+15.5.2024, 13:46:12 - INFO - Server is running on http://localhost:3030
+15.5.2024, 13:46:19 - INFO - Server is running on http://localhost:3030
+15.5.2024, 13:46:35 - INFO - Server is running on http://localhost:3030
+15.5.2024, 13:46:40 - INFO - Server is running on http://localhost:3030
+15.5.2024, 13:46:50 - INFO - Server is running on http://localhost:3030
+15.5.2024, 13:46:58 - INFO - Server is running on http://localhost:3030
+15.5.2024, 13:47:12 - INFO - Server is running on http://localhost:3030

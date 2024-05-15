@@ -3,7 +3,7 @@ import { loggerService } from "../../services/logger.service.js";
 
 export async function getUsers(req, res) {
   const { pageIdx, txt, sortBy } = req.query;
-  console.log("req.query:", req.query);
+  console.log("users query:", req.query);
   try {
     const users = await userService.query({ txt }, sortBy, +pageIdx);
     res.send(users);

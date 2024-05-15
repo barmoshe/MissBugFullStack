@@ -14,13 +14,11 @@ export const userService = {
 
 async function query(filterBy, sortBy, pageIdx = 1) {
   let filteredUsers = [...users];
-
   try {
     // Filtering
     if (filterBy) {
       filteredUsers = _filterUsers(filterBy, filteredUsers);
     }
-
     // Sorting
     if (sortBy) {
       filteredUsers = _sortUsers(sortBy, filteredUsers);
