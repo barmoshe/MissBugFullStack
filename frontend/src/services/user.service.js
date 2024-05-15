@@ -19,6 +19,7 @@ export const userService = {
 async function query(filterBy = {}) {
   try {
     const res = await axios.get(BASE_URL, { params: { ...filterBy } });
+    console.log("res.data", res.data.users);
     return res.data;
   } catch (err) {
     console.log("Error in userService.query", err);
