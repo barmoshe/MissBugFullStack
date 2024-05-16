@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { userService } from "../services/user.service.js";
 import { UserList } from "../cmps/UserList.jsx";
 import { UserFilterBar } from "../cmps/UserFilterBar.jsx";
@@ -6,28 +7,26 @@ import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
 
 export function UserIndex() {
   const [users, setUsers] = useState([]);
-  const [filterBy, setFilterBy] = useState({ txt: "", minBalance: 0 });
-  const [totalPages, setTotalPages] = useState(1);
-  const [currentPage, setCurrentPage] = useState(1);
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadUsers();
-  }, [filterBy, currentPage]); // Trigger loadUsers on filterBy or currentPage change
+  }, []);
   async function loadUsers() {
     try {
-      const { users, totalPages } = await userService.query({
-        ...filterBy,
-        pageIdx: currentPage,
-      });
+      const users = await userService.query();
+      console.log("users from UserIndex", users);
       setUsers(users);
       setTotalPages(totalPages);
     } catch (error) {
+      if (error.message === "Not logged in") {
+        showErrorMsg("Please login to view users");
+        navigate("/");
+        return;
+      }
       console.error("Error loading users:", error);
       showErrorMsg("Error loading users");
     }
-  }
-  function onPageChange(pageIdx) {
-    setCurrentPage(pageIdx);
   }
 
   async function onRemoveUser(userId) {
@@ -93,34 +92,17 @@ export function UserIndex() {
     }
   }
   if (!users) {
-    console.error("No users");
     return <div>Loading...</div>;
   }
   return (
     <div className="user-index">
       <button onClick={onAddUser}>Add User</button>
-      <UserFilterBar filterBy={filterBy} setFilterBy={setFilterBy} />
       <UserList
         users={users}
         onRemoveUser={onRemoveUser}
         onEditUser={onEditUser}
       />
       <button onClick={onAddUser}>Add User</button>
-      <div className="pagination">
-        <button
-          disabled={currentPage === 1}
-          onClick={() => onPageChange(currentPage - 1)}
-        >
-          Prev
-        </button>
-        <span>{currentPage}</span>
-        <button
-          disabled={currentPage === totalPages}
-          onClick={() => onPageChange(currentPage + 1)}
-        >
-          Next
-        </button>
-      </div>
     </div>
   );
 }
