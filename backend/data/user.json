@@ -1,12 +1,5 @@
 [
   {
-    "_id": "u101",
-    "fullname": "Muki Ja",
-    "username": "muki",
-    "password": "muki1234",
-    "score": 100
-  },
-  {
     "_id": "u102",
     "fullname": "Shuki Ja",
     "username": "shuki",
@@ -54,5 +47,42 @@
     "password": "123432443",
     "score": 55,
     "_id": "PBOrXo"
+  },
+  {
+    "username": "bar11",
+    "password": "$2b$10$tXD4hWtCf9XfzI9qnbQvW.8z3f0tbMZwXvDsUvNGU3snm6q/17rL2",
+    "fullname": "bar moshe",
+    "_id": "Fgi9S0",
+    "score": 10000,
+    "createdAt": 1715816742825,
+    "imgUrl": "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+  },
+  {
+    "username": "bar111",
+    "password": "$2b$10$XrLL0EvfcIPpGjx4R334k.aRGXAGvyczRKvGDBnBCunj7YNk4e6RG",
+    "fullname": "bar moshe",
+    "_id": "vTcaxJ",
+    "score": 10000,
+    "createdAt": 1715817551608,
+    "imgUrl": "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+  },
+  {
+    "username": "bar211",
+    "password": "$2b$10$1s3xz8XpBXC6b/rHu.BhT.iyPGywI6uLwg.htiFPuJRzrYNfPSHd2",
+    "fullname": "bar moshe",
+    "_id": "ENErFu",
+    "score": 10000,
+    "createdAt": 1715817586270,
+    "imgUrl": "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+  },
+  {
+    "username": "678",
+    "password": "$2b$10$blWX4hR4lN2P7WC1sO577eOR3K3OTAvh20uVD.lHJFpI0/2TyaYfO",
+    "isAdmin": true,
+    "fullname": "backttbar",
+    "_id": "k7xfr2",
+    "score": 10000,
+    "createdAt": 1715817825357,
+    "imgUrl": "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
   }
 ]
