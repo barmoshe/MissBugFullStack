@@ -7,8 +7,25 @@ import { UserIndex } from "./pages/UserIndex.jsx";
 import { UserDetails } from "./pages/UserDetails.jsx";
 import { AboutUs } from "./pages/AboutUs.jsx";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import { userService } from "./services/user.service.js";
+import { showSuccessMsg, showErrorMsg } from "./services/event-bus.service.js";
 
 import { UserMsg } from "./cmps/UserMsg.jsx";
+
+function RouteGuard({ children }) {
+  const loggedinUser = userService.getLoggedinUser();
+
+  function isAllowed() {
+    return loggedinUser?.isAdmin;
+  }
+
+  if (!isAllowed()) {
+    showErrorMsg("Not authorized");
+    return <Navigate to="/" />;
+  }
+  return children;
+}
 
 export function App() {
   return (
@@ -21,7 +38,14 @@ export function App() {
             <Route path="/bug" element={<BugIndex />} />
             <Route path="/bug/:bugId" element={<BugDetails />} />
             <Route path="/about" element={<AboutUs />} />
-            <Route path="/user" element={<UserIndex />} />
+            <Route
+              path="/user"
+              element={
+                <RouteGuard>
+                  <UserIndex />
+                </RouteGuard>
+              }
+            />
             <Route path="/user/:userId" element={<UserDetails />} />
           </Routes>
         </main>
