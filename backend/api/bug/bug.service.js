@@ -1,9 +1,13 @@
-import fs from "fs";
+import { MongoClient, ObjectId } from "mongodb";
 import { utilService } from "../../services/util.service.js";
 
-let bugs = [];
-bugs = utilService.readJsonFile("data/bug.json");
+// MongoDB connection string
+const url = "mongodb+srv://admin:admin@misterbug.sr2xsoj.mongodb.net/";
+const dbName = "MissBug";
+const collectionName = "bugDB";
 const PAGE_SIZE = 5;
+
+const client = new MongoClient(url);
 
 export const bugService = {
   query,
@@ -12,38 +16,41 @@ export const bugService = {
   save,
 };
 
+async function connect() {
+  if (!client) {
+    await client.connect();
+  }
+  return client.db(dbName).collection(collectionName);
+}
+
 async function query(filterBy, sortBy, pageIdx = 1) {
-  let filteredBugs = [...bugs];
-
   try {
-    // Filtering
+    const collection = await connect();
+
+    let query = {};
     if (filterBy) {
-      filteredBugs = _filterBugs(filterBy, filteredBugs);
-    }
-    if (!filteredBugs.length) {
-      return {
-        bugs: [],
-        totalPages: 0,
-      };
-    }
-    // Sorting
-    if (sortBy) {
-      filteredBugs = _sortBugs(sortBy, filteredBugs);
+      query = _buildFilterQuery(filterBy);
     }
 
-    // Paging
-    const totalPages = Math.ceil(filteredBugs.length / PAGE_SIZE);
+    const totalDocs = await collection.countDocuments(query);
+    const totalPages = Math.ceil(totalDocs / PAGE_SIZE);
     if (pageIdx > totalPages) {
       throw new Error("Invalid page index");
     }
 
-    const startIndex = (pageIdx - 1) * PAGE_SIZE || 0;
-    const endIndex = startIndex + PAGE_SIZE;
-    const pagedBugs = filteredBugs.slice(startIndex, endIndex);
+    let bugs = await collection
+      .find(query)
+      .skip((pageIdx - 1) * PAGE_SIZE)
+      .limit(PAGE_SIZE)
+      .toArray();
+
+    if (sortBy) {
+      bugs = _sortBugs(sortBy, bugs);
+    }
 
     return {
-      bugs: pagedBugs,
-      totalPages: totalPages,
+      bugs,
+      totalPages,
     };
   } catch (error) {
     throw error;
@@ -52,8 +59,10 @@ async function query(filterBy, sortBy, pageIdx = 1) {
 
 async function getById(bugId) {
   try {
-    const bug = await bugs.find((bug) => bug._id === bugId);
-    return bug;
+    const collection = await connect();
+    const bug = await collection.findOne({
+      _id: ObjectId.createFromHexString(bugId),
+    });
   } catch (error) {
     throw error;
   }
@@ -61,9 +70,8 @@ async function getById(bugId) {
 
 async function remove(bugId) {
   try {
-    const bugIdx = bugs.findIndex((bug) => bug._id === bugId);
-    bugs.splice(bugIdx, 1);
-    _saveBugsToFile();
+    const collection = await connect();
+    await collection.deleteOne({ _id: ObjectId.createFromHexString(bugId) });
   } catch (error) {
     throw error;
   }
@@ -71,51 +79,40 @@ async function remove(bugId) {
 
 async function save(bugToSave) {
   try {
+    const collection = await connect();
+
     if (bugToSave._id) {
-      const idx = bugs.findIndex((bug) => bug._id === bugToSave._id);
-      if (idx < 0) throw `Can't find bug with _id ${bugToSave._id}`;
-      bugs[idx] = bugToSave;
+      const bugId = ObjectId.createFromHexString(bugToSave._id);
+      await collection.updateOne({ _id: bugId }, { $set: bugToSave });
     } else {
-      bugToSave._id = utilService.makeId();
+      bugToSave._id = new ObjectId();
       bugToSave.createdAt = Date.now();
-      bugs.push(bugToSave);
+      await collection.insertOne(bugToSave);
     }
-    await _saveBugsToFile();
+
     return bugToSave;
   } catch (error) {
     throw error;
   }
 }
 
-function _filterBugs(filterBy, bugs) {
-  const { txt, severity } = filterBy;
+function _buildFilterQuery(filterBy) {
+  const query = {};
 
-  const filteredBugs = bugs.filter((bug) => {
-    let matchTxt = true;
-    let matchSeverity = true;
+  if (filterBy.txt) {
+    const txt = filterBy.txt.toLowerCase();
+    query.$or = [
+      { title: { $regex: txt, $options: "i" } },
+      { description: { $regex: txt, $options: "i" } },
+      { labels: { $elemMatch: { $regex: txt, $options: "i" } } },
+    ];
+  }
 
-    // Ensure bug properties are defined and valid
-    const bugTitle = bug.title ? bug.title.toLowerCase() : "";
-    const bugDescription = bug.description ? bug.description.toLowerCase() : "";
-    const bugLabels = Array.isArray(bug.labels) ? bug.labels : [];
-    const bugSeverity = typeof bug.severity === "number" ? bug.severity : -1;
+  if (filterBy.severity) {
+    query.severity = { $gte: filterBy.severity };
+  }
 
-    if (txt) {
-      const txtLower = txt.toLowerCase();
-      matchTxt =
-        bugTitle.includes(txtLower) ||
-        bugDescription.includes(txtLower) ||
-        bugLabels.some((label) => label.toLowerCase().includes(txtLower));
-    }
-
-    if (severity) {
-      matchSeverity = bugSeverity >= severity;
-    }
-
-    return matchTxt && matchSeverity;
-  });
-
-  return filteredBugs;
+  return query;
 }
 
 function _sortBugs(sortBy, bugs) {
@@ -131,12 +128,14 @@ function _sortBugs(sortBy, bugs) {
   }
 }
 
-function _saveBugsToFile(path = "./data/bug.json") {
-  return new Promise((resolve, reject) => {
-    const data = JSON.stringify(bugs, null, 4);
-    fs.writeFile(path, data, (err) => {
-      if (err) return reject(err);
-      resolve();
-    });
-  });
-}
+// Example function to print all data in MissBug database and bugDB collection
+// async function printAllData() {
+//   try {
+//     const collection = await connect();
+//     const data = await collection.find().toArray();
+//     console.log(data);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
+// printAllData();
