@@ -20,6 +20,10 @@ async function connect() {
   if (!client) {
     await client.connect();
   }
+  console.log(
+    "Connected to MongoDB",
+    client.db(dbName).collection(collectionName)
+  );
   return client.db(dbName).collection(collectionName);
 }
 
