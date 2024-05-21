@@ -14,7 +14,7 @@
   {
     "_id": "nO2UZJ",
     "title": "Component Loading Failure",
-    "severity": 2,
+    "severity": 22,
     "createdAt": 1714058333991,
     "description": "This bug suggests that there's an issue with loading certain components or resources within the system, affecting user experience and functionality.",
     "labels": ["need-CR", "UI", "backend"],

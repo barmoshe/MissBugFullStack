@@ -23,6 +23,7 @@ export const userService = {
   login,
   saveLocalUser,
   logout,
+  signup,
 };
 
 async function query(filterBy = {}) {
@@ -109,6 +110,14 @@ function saveLocalUser(user) {
 async function logout() {
   await axios.post(BASE_AUTH_URL + "logout");
   sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER);
+}
+
+async function signup(credentials) {
+  const { data: user } = await axios.post(
+    BASE_AUTH_URL + "signup",
+    credentials
+  );
+  return saveLocalUser(user);
 }
 
 // async function remove(bugId) {

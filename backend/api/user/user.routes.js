@@ -7,11 +7,12 @@ import {
 } from "./user.controller.js";
 import { logRequests } from "../../middleware/logger.middleware.js";
 import { requireAdmin } from "../../middleware/requireAuth.middleware.js";
+import { requireUser } from "../../middleware/requireAuth.middleware.js";
 
 const router = express.Router();
 
 router.get("/", logRequests, requireAdmin, getUsers);
-router.get("/:id", logRequests, getUser);
+router.get("/:id", logRequests, requireUser, getUser);
 router.delete("/:id", logRequests, requireAdmin, deleteUser);
 router.put("/:id", logRequests, requireAdmin, updateUser);
 export const userRoutes = router;

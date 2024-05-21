@@ -58,7 +58,12 @@ async function save(bug) {
       return res.data;
     } else {
       // If bug doesn't have an _id, it's a new bug, so add it
-      const res = await axios.post(BASE_URL, { bug });
+      const res = await axios.post(BASE_URL, {
+        ...bug,
+        createdAt: Date.now(),
+        creator: { _id: "u101", fullname: "Puki Ben David" },
+      });
+
       return res.data;
     }
   } catch (err) {

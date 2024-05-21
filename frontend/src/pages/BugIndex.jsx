@@ -3,6 +3,8 @@ import { BugList } from "../cmps/BugList.jsx";
 import { BugFilterBar } from "../cmps/BugFilterBar.jsx";
 import { bugService } from "../services/bug.service.js";
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
+import { useContext } from "react";
+import { Context } from "../RootCmp.jsx";
 
 export function BugIndex() {
   const [bugs, setBugs] = useState([]);
@@ -10,6 +12,7 @@ export function BugIndex() {
   const [sortBy, setSortBy] = useState("title");
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
+  const [loggedinUser] = useContext(Context);
 
   useEffect(() => {
     loadBugs();
@@ -23,6 +26,8 @@ export function BugIndex() {
         sortBy,
       });
       setBugs(bugs);
+      console.log("bugs from BugIndex", bugs);
+
       setTotalPages(totalPages);
     } catch (error) {
       if (error.response?.status === 400) {

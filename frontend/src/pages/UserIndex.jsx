@@ -17,7 +17,6 @@ export function UserIndex() {
       const users = await userService.query();
       console.log("users from UserIndex", users);
       setUsers(users);
-      setTotalPages(totalPages);
     } catch (error) {
       if (error.message === "Not logged in") {
         showErrorMsg("Please login to view users");

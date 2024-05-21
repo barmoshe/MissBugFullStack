@@ -23,7 +23,8 @@
     "cors": "^2.8.5",
     "cryptr": "^6.3.0",
     "express": "^4.19.2",
-    "follow-redirects": "^1.15.6"
+    "follow-redirects": "^1.15.6",
+    "mongodb": "^6.6.2"
   },
   "type": "module"
 }

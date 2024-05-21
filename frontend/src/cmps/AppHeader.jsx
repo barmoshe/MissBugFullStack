@@ -1,15 +1,15 @@
 import { NavLink } from "react-router-dom";
 import { UserMsg } from "./UserMsg.jsx";
-import { useState } from "react";
 import { LoginSignup } from "./LoginSignup.jsx";
 import { userService } from "../services/user.service.js";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js";
+import { Context } from "../RootCmp.jsx";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function AppHeader() {
-  // Will be in the store in the future~~
-  const [loggedinUser, setLoggedinUser] = useState(
-    userService.getLoggedinUser()
-  );
+  const [loggedinUser, setLoggedinUser] = useContext(Context);
+  const navigate = useNavigate();
 
   async function onLogin(credentials) {
     console.log(credentials);
@@ -63,7 +63,7 @@ export function AppHeader() {
 
           {loggedinUser && (
             <div className="user-preview">
-              <h3>
+              <h3 onClick={() => navigate("/user/" + loggedinUser._id)}>
                 Hello {loggedinUser.fullname}
                 <button onClick={onLogout}>Logout</button>
               </h3>
