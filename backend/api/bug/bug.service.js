@@ -22,7 +22,7 @@ async function connect() {
   }
   console.log(
     "Connected to MongoDB",
-    client.db(dbName).collection(collectionName)
+    await client.db(dbName).collection(collectionName).find().toArray()
   );
   return client.db(dbName).collection(collectionName);
 }
