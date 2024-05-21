@@ -2,7 +2,7 @@ import { MongoClient, ObjectId } from "mongodb";
 import { utilService } from "../../services/util.service.js";
 
 // MongoDB connection string
-const url = "mongodb+srv://admin:admin@misterbug.sr2xsoj.mongodb.net/";
+const url = process.env.MONGODB_URI || "mongodb://localhost:27017";
 const dbName = "MissBug";
 const collectionName = "bugDB";
 const PAGE_SIZE = 5;
@@ -34,6 +34,7 @@ async function query(filterBy, sortBy, pageIdx = 1) {
 
     const totalDocs = await collection.countDocuments(query);
     const totalPages = Math.ceil(totalDocs / PAGE_SIZE);
+    console.log("totalPages", totalPages);
     if (pageIdx > totalPages) {
       throw new Error("Invalid page index");
     }
